@@ -22,7 +22,7 @@ Below are the required settings and instructions for all (documented) deployment
 > NOTE: Serverless deployments (as configured here) use [default service accounts](https://cloud.google.com/iam/docs/service-accounts#default) which provide a broad set of permissions to assist you in getting a working prototype. When preparing to launch to production, the Google Cloud team recommends the best practice of "least privileges," and instead use [user-managed service accounts](https://cloud.google.com/iam/docs/service-accounts#user-managed) with the minimal set of permissions allowing your app to function properly.
 
 
-## **Local Express server (Node 10, 17)**
+## **Local Express server**
 
 **TL;DR:** application files (`index.js` &amp; `package.json`). Instructions:
 
@@ -31,27 +31,27 @@ Below are the required settings and instructions for all (documented) deployment
 1. **Run** `npm start` to run locally
 
 
-## **App Engine (Node 10, 12, 14, 16)**
+## **App Engine**
 
-**TL;DR:** application files plus `app.yaml`. You may (first) edit `app.yaml` to specify the desired Node version (default: Node 16). Instruction(s):
+**TL;DR:** application files plus `app.yaml`. You may (first) edit `app.yaml` to specify the desired Node version (default: Node 18). Instruction(s):
 
 1. **Run** `gcloud app deploy` to deploy to App Engine
     - You'll be prompted for the REGION if deploying to App Engine the first time.
     - App Engine apps are tied to one region, so it can't be changed once it's set, meaning you won't be prompted thereafter.
 
 
-## **Cloud Functions (Node 10, 12, 14, 16)**
+## **Cloud Functions**
 
 **TL;DR:** Uses only the application files. Instruction(s):
 
-1. **Run** `gcloud functions deploy translate --runtime nodejs16 --entry-point app --trigger-http --allow-unauthenticated` to deploy to Cloud Functions (or Node 10, 12, 14)
+1. **Run** `gcloud functions deploy translate --runtime nodejs18 --entry-point app --trigger-http --allow-unauthenticated` to deploy to Cloud Functions
     - You'll be prompted for the REGION if deploying a Cloud Function the first time.
     - Cloud Functions can be deployed to different regions within a project, but once the region has been set for a function, it cannot be changed.
 
 The command creates &amp; deploys a new HTTP-triggered Cloud Function named `translate`. Cloud Functions is directed to call the application object, `app`, via `--entry-point`. During execution `translate()` is called by `app`. In the [Python version](../python), `--entry-point` is unnecessary because `translate()` *is* the application entry point.
 
 
-## **Cloud Run (Node 10+ via Cloud Buildpacks)**
+## **Cloud Run (via Cloud Buildpacks)**
 
 **TL;DR:** Uses only the application files. Instruction(s):
 

@@ -1,5 +1,10 @@
 # Nebulous serverless Cloud Translation API app
 
+| :boom: Jan 2024 update |
+|:---------------------------|
+| Python 2.7 apps can no longer be deployed on App Engine. Either upgrade to 3.8+ or migrate your app to Cloud Run or other platform that still supports Python 2. More information is available in the ["What you need to know" deprecation post](https://dev.to/wescpy/python-app-engine-jan-2024-deprecation-what-you-need-to-know-4bci). |
+
+
 ## Python (2 and 3) version
 
 While the majority of this app's deployments are in Python 3, there are still users upgrading from Python 2, so our Python 2 code is meant to help with migration &amp; planning. Admittedly, there may _seem_ to be a bit of "cheating" due to the duplicity of Python 2 and 3, especially since the application is compatible across both language versions without modification or use of compatibility libraries. However there are significant differences between Python 2 and 3 deployment requirements irregardless of language differences. Additional notes:
@@ -14,10 +19,12 @@ While the majority of this app's deployments are in Python 3, there are still us
 Deployment | Python 2 | Python 3
 --- | --- | ---
 Local/hosted Flask|[codelab](https://codelabs.developers.google.com/codelabs/cloud-nebulous-serverless-python-flask?utm_source=codelabs&utm_medium=et&utm_campaign=CDR_wes_aap-serverless_nebservflask_sms_201020&utm_content=-)|_same as Python 2_
-App Engine|[codelab](https://codelabs.developers.google.com/codelabs/cloud-nebulous-serverless-python-gae2?utm_source=codelabs&utm_medium=et&utm_campaign=CDR_wes_aap-serverless_nebservgae2_sms_201020&utm_content=-)|[codelab](https://codelabs.developers.google.com/codelabs/cloud-nebulous-serverless-python-gae3?utm_source=codelabs&utm_medium=et&utm_campaign=CDR_wes_aap-serverless_nebservgae3_sms_201020&utm_content=-)
+App Engine|^[codelab](https://codelabs.developers.google.com/codelabs/cloud-nebulous-serverless-python-gae2?utm_source=codelabs&utm_medium=et&utm_campaign=CDR_wes_aap-serverless_nebservgae2_sms_201020&utm_content=-)|[codelab](https://codelabs.developers.google.com/codelabs/cloud-nebulous-serverless-python-gae3?utm_source=codelabs&utm_medium=et&utm_campaign=CDR_wes_aap-serverless_nebservgae3_sms_201020&utm_content=-)
 Cloud Functions| _N/A_ |[codelab](https://codelabs.developers.google.com/codelabs/cloud-nebulous-serverless-python-gcf?utm_source=codelabs&utm_medium=et&utm_campaign=CDR_wes_aap-serverless_nebservgcf_sms_201020&utm_content=-)
 Cloud Run (Docker)|[codelab](https://codelabs.developers.google.com/codelabs/cloud-nebulous-serverless-python-gcr2?utm_source=codelabs&utm_medium=et&utm_campaign=CDR_wes_aap-serverless_nebservgcr2_sms_201020&utm_content=-)|[codelab](https://codelabs.developers.google.com/codelabs/cloud-nebulous-serverless-python-gcr3?utm_source=codelabs&utm_medium=et&utm_campaign=CDR_wes_aap-serverless_nebservgcr3_sms_201020&utm_content=-)
 Cloud Run (Buildpacks)| _N/A_ |[codelab](https://codelabs.developers.google.com/codelabs/cloud-nebulous-serverless-python-gcrbp?utm_source=codelabs&utm_medium=et&utm_campaign=CDR_wes_aap-serverless_nebservgcrbp_sms_201020&utm_content=-)
+
+^ — not recommended as of Jan 2024 as developers can no longer deploy Python 2 apps to App Engine (see sidebar above)
 
 
 ## Deployments and their files
@@ -80,23 +87,23 @@ Instructions:
 1. **Run** `python main.py` to run on local Flask server (or `python3`)
 
 
-## **App Engine (Python 2)**
+~~## **App Engine (Python 2)**
 
-**TL;DR:** app files plus `app.yaml`, `appengine_config.py`, and `lib`
+~~**TL;DR:** app files plus `app.yaml`, `appengine_config.py`, and `lib`
 
-File | Description
+~~File | Description
 --- | ---
 `main.py`|**use as-is** from repo
-`app.yaml`|**use as-is** from repo (ensure `#runtime:python310` commented out)
+`app.yaml`|**use as-is** from repo (ensure `#runtime:python312` commented out)
 `appengine_config.py`|**use as-is** from repo
 `requirements.txt`|**use as-is** to install packages locally (see below) but _unused_ thereafter
 `lib`|**create folder** per instructions below
 `Dockerfile`|_unused_ (delete or leave as-is)
 `Procfile`|_unused_ (delete or leave as-is)
 
-Instructions:
+~~Instructions:
 
-1. **Run** `pip install -t lib -r requirements.txt` to populate `lib` folder (or `pip2`)
+~~1. **Run** `pip install -t lib -r requirements.txt` to populate `lib` folder (or `pip2`)
 1. **Run** `gcloud app deploy` to deploy to Python 2 App Engine
     - You'll be prompted for the REGION if deploying to App Engine the first time.
     - App Engine apps are tied to one region, so it can't be changed once it's set, meaning you won't be prompted thereafter.
@@ -109,7 +116,7 @@ Instructions:
 File | Description
 --- | ---
 `main.py`|**use as-is** from repo
-`app.yaml`|**uncomment** `runtime:python310` (or Python 3.7-3.9); **delete** all other lines
+`app.yaml`|**uncomment** `runtime:python312` (or Python 3.8-3.12); **delete** all other lines
 `appengine_config.py`|_unused_ (delete or leave as-is; only for Python 2 App Engine)
 `requirements.txt`|**use as-is** from repo
 `lib`|**delete** (or rename) this folder if it exists (not used with Python 3 App Engine)
@@ -142,7 +149,7 @@ File | Description
 Instructions:
 
 1. (optional) **Delete** `app.yaml`, `lib` and `appengine_config.py` (unused)
-1. **Run** `gcloud functions deploy translate --runtime python310 --trigger-http --allow-unauthenticated` to deploy to Cloud Functions (or Python 3.7-3.9)
+1. **Run** `gcloud functions deploy translate --runtime python312 --trigger-http --allow-unauthenticated` to deploy to Cloud Functions (or Python 3.8-3.12)
     - That command creates &amp; deploys a new HTTP-triggered Cloud Function (name must match what's in `main.py`)
     - You'll be prompted for the REGION if deploying a Cloud Function the first time.
     - Cloud Functions can be deployed to different regions within a project, but once the region has been set for a function, it cannot be changed.

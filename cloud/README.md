@@ -42,7 +42,7 @@ Once you have a billing account, you can enable the services/APIs for each produ
 
 Alternatively, you use the [`gcloud` CLI (command-line interface)](https://cloud.google.com/sdk/gcloud) available from the [Cloud SDK](https://cloud.google.com/sdk). Review the [Cloud SDK install instructions](https://cloud.google.com/sdk/docs/quickstart) if needed. New users should also reference the [`gcloud` cheatsheet](https://cloud.google.com/sdk/docs/cheatsheet).
 
-Enable all 4 services with this one `gcloud` command: `gcloud services enable translate.googleapis.com run.googleapis.com cloudfunctions.googleapis.com appengine.googleapis.com`
+Enable all required services (serverless platforms plus Cloud Translation and Artifact Registry for containers) with this one CLI command: `gcloud services enable appengine.googleapis.com artifactregistry.googleapis.com cloudfunctions.googleapis.com run.googleapis.com translate.googleapis.com` If you don't have billing enabled or don't have a valid billing account, you'll be notified here.
 
 
 ## The application itself

@@ -1,6 +1,6 @@
 | :boom: ALERT!!             |
 |:---------------------------|
-| This repo will soon be relocating to [GoogleCloudPlatform](https://github.com/GoogleCloudPlatform) as we better organize these code samples! Stay tuned as more info is coming soon. |
+| This is now the canonical source as [Google has archived the upstream corp repo in Mar 2024](https://github.com/googlecodelabs/cloud-nebulous-serverless). |
 
 
 # Nebulous Google Cloud serverless &amp; API sample applications
@@ -33,11 +33,11 @@ The table below outlines the development languages, supported versions, deployme
 
 Language | Versions | Deployment | Framework
 --- | --- | --- | ---
-Python|2.7|local, cloud|Flask
-Python|3.6+|local, cloud|Flask
-Node.js|10, 17|local|Express.js
-Node.js|10, 12, 14, 16|cloud|Express.js
+Python|2.7^|local, cloud|Flask
+Python|3.8+|local, cloud|Flask
+Node.js|18+|local, cloud|Express.js
 
+^ — **Jan 2024 update:** Python 2.7 apps can no longer be deployed on App Engine. Either upgrade to 3.8+ or migrate your app to Cloud Run or other platform that still supports Python 2. More information is available in the ["What you need to know" deprecation post](https://dev.to/wescpy/python-app-engine-jan-2024-deprecation-what-you-need-to-know-4bci).
 
 ## Cost
 
@@ -51,7 +51,7 @@ While many Google APIs can be used without fees, use of GCP products &amp; APIs 
 
 When enabling services, you may be asked for an active billing account which requires a financial instrument such as a credit card. Reference relevant pricing information before doing so. While Cloud Functions and Cloud Run share a similar Always Free tier and pricing model, App Engine is slightly different.
 
-Furthermore, deploying to GCP serverless platforms incur [minor build and storage costs](https://cloud.google.com/appengine/pricing#pricing-for-related-google-cloud-products). [Cloud Build](https://cloud.google.com/build/pricing) has its own free quota as does [Cloud Storage](https://cloud.google.com/storage/pricing#cloud-storage-always-free). For greater transparency, Cloud Build builds your application image which is then sent to the [Cloud Container Registry](https://cloud.google.com/container-registry/pricing), or [Artifact Registry](https://cloud.google.com/artifact-registry/pricing), its successor; storage of that image uses up some of that (Cloud Storage) quota as does network egress when transferring that image to the service you're deploying to. However you may live in region that does not have such a free tier, so be aware of your storage usage to minimize potential costs. (You may look at what storage you're using and how much, including deleting build artifacts via [your Cloud Storage browser](https://console.cloud.google.com/storage/browser).)
+Furthermore, deploying to GCP serverless platforms incur [minor build and storage costs](https://cloud.google.com/appengine/pricing#pricing-for-related-google-cloud-products). [Cloud Build](https://cloud.google.com/build/pricing) has its own free quota as does [Cloud Storage](https://cloud.google.com/storage/pricing#cloud-storage-always-free). For greater transparency, Cloud Build builds your application image which is then sent to the [Container Registry](https://cloud.google.com/container-registry/pricing), or [Artifact Registry](https://cloud.google.com/artifact-registry/pricing), its successor; storage of that image uses up some of that (Cloud Storage) quota as does network egress when transferring that image to the service you're deploying to. However you may live in region that does not have such a free tier, so be aware of your storage usage to minimize potential costs. (You may look at what storage you're using and how much, including deleting build artifacts via [your Cloud Storage browser](https://console.cloud.google.com/storage/browser).)
 
 More specific cost information for each sample is available in their respective README files.
 
