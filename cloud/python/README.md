@@ -53,7 +53,7 @@ File | Description
 --- | ---
 `main.py`|**use as-is** from repo
 `app.yaml`|_unused_ (delete or leave as-is)
-`appengine_config.py`|_unused_ (delete or leave as-is; only for Python 2 App Engine)
+`appengine_config.py`|_unused_ (delete)
 `requirements.txt`|**use as-is** to install packages locally (see below) but _unused_ thereafter
 `lib`|_unused_ (delete or leave as-is if it exists)
 `Dockerfile`|_unused_ (delete or leave as-is)
@@ -74,7 +74,7 @@ File | Description
 --- | ---
 `main.py`|**use as-is** from repo
 `app.yaml`|_unused_ (delete or leave as-is)
-`appengine_config.py`|_unused_ (delete or leave as-is; only for Python 2 App Engine)
+`appengine_config.py`|_unused_ (delete)
 `requirements.txt`|**use as-is** to install packages locally (see below) but _unused_ thereafter
 `lib`|_unused_ (delete or leave as-is if it exists)
 `Dockerfile`|_unused_ (delete or leave as-is)
@@ -87,26 +87,29 @@ Instructions:
 1. **Run** `python main.py` to run on local Flask server (or `python3`)
 
 
-~~## **App Engine (Python 2)**
+## ~~App Engine (Python 2)~~
 
-~~**TL;DR:** app files plus `app.yaml`, `appengine_config.py`, and `lib`
+> NOTE: apps can no longer be deployed to Python 2 GAE; this section is left
+for historical purposes.
 
-~~File | Description
+~~**TL;DR:** app files plus `app.yaml`, `appengine_config.py`, and `lib`~~
+
+File | Description
 --- | ---
-`main.py`|**use as-is** from repo
-`app.yaml`|**use as-is** from repo (ensure `#runtime:python312` commented out)
-`appengine_config.py`|**use as-is** from repo
-`requirements.txt`|**use as-is** to install packages locally (see below) but _unused_ thereafter
-`lib`|**create folder** per instructions below
-`Dockerfile`|_unused_ (delete or leave as-is)
-`Procfile`|_unused_ (delete or leave as-is)
+~~`main.py`~~|~~**use as-is** from repo~~
+~~`app.yaml`~~|~~**use as-is** from repo (ensure `#runtime:python312` commented out)~~
+~~`appengine_config.py`~~|~~**use as-is** from repo~~
+~~`requirements.txt`~~|~~**use as-is** to install packages locally (see below) but _unused_ thereafter~~
+~~`lib`~~|~~**create folder** per instructions below~~
+~~`Dockerfile`~~|~~_unused_ (delete or leave as-is)~~
+~~`Procfile`~~|~~_unused_ (delete or leave as-is)~~
 
-~~Instructions:
+~~Instructions:~~
 
-~~1. **Run** `pip install -t lib -r requirements.txt` to populate `lib` folder (or `pip2`)
-1. **Run** `gcloud app deploy` to deploy to Python 2 App Engine
-    - You'll be prompted for the REGION if deploying to App Engine the first time.
-    - App Engine apps are tied to one region, so it can't be changed once it's set, meaning you won't be prompted thereafter.
+1. ~~**Run** `pip install -t lib -r requirements.txt` to populate `lib` folder (or `pip2`)~~
+1. ~~**Run** `gcloud app deploy` to deploy to Python 2 App Engine~~
+    - ~~You'll be prompted for the REGION if deploying to App Engine the first time.~~
+    - ~~App Engine apps are tied to one region, so it can't be changed once it's set, meaning you won't be prompted thereafter.~~
 
 
 ## **App Engine (Python 3)**
@@ -117,7 +120,7 @@ File | Description
 --- | ---
 `main.py`|**use as-is** from repo
 `app.yaml`|**uncomment** `runtime:python312` (or Python 3.8-3.12); **delete** all other lines
-`appengine_config.py`|_unused_ (delete or leave as-is; only for Python 2 App Engine)
+`appengine_config.py`|_unused_ (delete)
 `requirements.txt`|**use as-is** from repo
 `lib`|**delete** (or rename) this folder if it exists (not used with Python 3 App Engine)
 `Dockerfile`|_unused_ (delete or leave as-is)
@@ -140,7 +143,7 @@ File | Description
 --- | ---
 `main.py`|**use as-is** from repo
 `app.yaml`|_unused_ (delete or leave as-is; only for App Engine)
-`appengine_config.py`|_unused_ (delete or leave as-is; only for Python 2 App Engine)
+`appengine_config.py`|_unused_ (delete)
 `requirements.txt`|**use as-is** from repo
 `lib`|**delete** (or rename) this folder if it exists (not used with Cloud Functions)
 `Dockerfile`|_unused_ (delete or leave as-is)
@@ -164,7 +167,7 @@ File | Description
 --- | ---
 `main.py`|**use as-is** from repo
 `app.yaml`|_unused_ (delete or leave as-is; only for App Engine)
-`appengine_config.py`|_unused_ (delete or leave as-is; only for Python 2 App Engine)
+`appengine_config.py`|_unused_ (delete)
 `requirements.txt`|`grpcio<1.40.0` applies to this deployment
 `lib`|**delete** (or rename) this folder if it exists (not used with Cloud Run)
 `Dockerfile`|**use as-is** from repo (ensure `#FROM python:3-slim` commented out)
@@ -194,7 +197,7 @@ File | Description
 --- | ---
 `main.py`|**use as-is** from repo
 `app.yaml`|_unused_ (delete or leave as-is; only for App Engine)
-`appengine_config.py`|_unused_ (delete or leave as-is; only for Python 2 App Engine)
+`appengine_config.py`|_unused_ (delete)
 `requirements.txt`|**use as-is** from repo
 `lib`|**delete** (or rename) this folder if it exists (not used with Cloud Run)
 `Dockerfile`|**replace** `FROM python:2-slim` with `FROM python:3-slim` (commented out) but **keep all other lines**
@@ -224,7 +227,7 @@ File | Description
 --- | ---
 `main.py`|**use as-is** from repo
 `app.yaml`|_unused_ (delete or leave as-is; only for App Engine)
-`appengine_config.py`|_unused_ (delete or leave as-is; only for Python 2 App Engine)
+`appengine_config.py`|_unused_ (delete)
 `requirements.txt`|**use as-is** from repo
 `lib`|**delete** (or rename) this folder if it exists (not used with Cloud Run)
 `Dockerfile`|**delete** (or rename) this file (_required_)
