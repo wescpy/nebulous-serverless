@@ -7,8 +7,6 @@
 #   $ gcloud topic gcloudignore
 #
 .gcloudignore
-.dockerignore
-.gitignore
 
 # Source code control files
 .git/
@@ -20,14 +18,6 @@
 LICENSE
 *.md
 
-# Tests/results (not in .gitignore)
-noxfile.py
-test_translate.py
-pylintrc
-pylintrc.test
-
-# most of .gitignore (except `lib`)
-#
 # Python
 *.py[cod]
 __pycache__/
@@ -57,12 +47,18 @@ pip-log.txt
 # Tests/results
 .nox/
 .pytest_cache/
+noxfile.py
 .cache
 .pytype
 .coverage
 coverage.xml
 *sponge_log.xml
 system_tests/local_test_setup
+pylintrc
+pylintrc.test
+test/
+credentials.json
+test_*.py
 
 # Mac
 .DS_Store

@@ -22,7 +22,9 @@ pip-log.txt
 .nox/
 .pytest_cache/
 noxfile.py
-test_translate.py
+test_*.py
+.cache
+.pytype
 .coverage
 coverage.xml
 *sponge_log.xml
