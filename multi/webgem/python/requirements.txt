@@ -1,0 +1,4 @@
+#gunicorn
+flask
+pillow
+google-generativeai
