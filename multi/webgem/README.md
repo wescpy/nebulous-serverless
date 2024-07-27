@@ -37,9 +37,8 @@ Python developers have the option to [create & activate a virtual environment ("
     - **Node.js**: `node main.js` or `node main.mjs`
     - **Python**: `python main.py` (or `python3`)
 
-<small>
 <sup>^</sup> — Alternatively for Python, instead of `settings.py`, you can save it to `.env` but would need to install `python-dotenv` and add the code to use it if you want to more closely mirror the Node version.
-</small>
+
 
 ### Cloud (GCP serverless platforms)
 
@@ -56,10 +55,10 @@ For all cloud deployments, the commands for Node.js and Python are identical.
 
 **NOTE:** _Cloud Functions (GCF) is a product generally used for microservices, simple functions, or short mobile backend requests, not entire web apps. As this is a_ basic _web app, I may try to it working on GCF, but at this time, deployments are not available. If it ever supports GCF in the future, the instructions will be similar to what's crossed out below._
 
-~~1. Create API key per instructions above.
-~~1. Run `gcloud functions deploy genai --runtime PLATFORM --entry-point app --trigger-http --allow-unauthenticated`~~
-    ~~- **Node.js**: Use  `nodejs20` for `nodejs22` for `PLATFORM`.~~
-    ~~- **Python**: Use  `python311` for `python312` for `PLATFORM`.~~
+1. ~~Create API key per instructions above.~~
+1. ~~Run `gcloud functions deploy genai --runtime PLATFORM --entry-point app --trigger-http --allow-unauthenticated`~~
+    - ~~**Node.js**: Use  `nodejs20` for `nodejs22` for `PLATFORM`.~~
+    - ~~**Python**: Use  `python311` for `python312` for `PLATFORM`.~~
 
 
 #### Cloud Run
