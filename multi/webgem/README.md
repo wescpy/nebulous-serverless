@@ -16,7 +16,7 @@ App | Description | Platform
 [`nodejs/templates/index.html`](/multi/webgem/nodejs/templates/index.html) | Web template | Nunjucks (identical to Jinja2)
 [`nodejs/app.yaml`](/multi/webgem/nodejs/app.yaml) | Config file | App Engine
 [`nodejs/Dockerfile`](/multi/webgem/nodejs/Dockerfile) | (optional) Dockerfile | Cloud Run (**with** Docker)
-[`nodejs/package.json`](/multi/webgem/nodejs/package.json) |  3rd-party packages file | all
+[`nodejs/package.json`](/multi/webgem/nodejs/package.json) |  3rd-party packages file | Node
 [`python/main.py`](/multi/webgem/python/main.py) | Flask sample app | Python
 [`python/templates/index.html`](/multi/webgem/python/templates/index.html) | Web template | Jinja2 (identical to Nunjucks)
 [`python/app.yaml`](/multi/webgem/python/app.yaml) | Config file | App Engine
@@ -61,7 +61,7 @@ For all cloud deployments, the commands for Node.js and Python are identical. Th
 
 #### Cloud Functions
 
-**NOTE:** _Cloud Functions (GCF) is a product generally used for microservices, simple functions, or short mobile backend requests, not entire web apps. As this is a_ basic _web app, I may try to it working on GCF, but at this time, deployments are not available. If it ever supports GCF in the future, the instructions will be similar to what's crossed out below._
+Cloud Functions (GCF) is a product generally used for microservices, simple functions, or short mobile backend requests, not entire web apps. As this is a_ basic _web app, I may try to it working on GCF, but at this time, deployments are not available. If it ever supports GCF in the future, the instructions will be similar to what's crossed-out below.
 
 1. ~~Create API key per instructions above.~~
 1. ~~Run `gcloud functions deploy genai --runtime PLATFORM --entry-point app --trigger-http --allow-unauthenticated`~~
@@ -78,8 +78,8 @@ For all cloud deployments, the commands for Node.js and Python are identical. Th
         - The `Procfile` is unused and may be deleted if desired.
     - Deployments without using Docker:
         - Deleting the `Dockerfile` is **required**.
-        - [Cloud Buildpacks](https://github.com/GoogleCloudPlatform/buildpacks) automatically detects your language and selects a [default runtime version](https://cloud.google.com/docs/buildpacks/builders).
-        - Update instructions in `Procfile` as desired.
+        - [Cloud Buildpacks](https://github.com/GoogleCloudPlatform/buildpacks) automatically detects your language and selects a [default runtime version](https://cloud.google.com/docs/buildpacks/builders). (It also creates an internal `Dockerfile` to build your container with, but you won't see it nor have to know anything about Docker or containers other than your application is bundled into one.)
+        - Update startup/"entrypoint" instructions in `Procfile` as desired.
 1. Run `gcloud run deploy genai --allow-unauthenticated --platform managed --source .`
 
 
