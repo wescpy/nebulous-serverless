@@ -9,7 +9,10 @@ These are the code samples that are found in the 4th post in the [series introdu
 
 
 ## Table of contents
-App | Description | Platform
+
+### Node.js
+
+File | Description | Platform
 --- | --- | ---
 [`nodejs/main.js`](/multi/webgem/nodejs/main.js) | Express.js sample app | Node (CommonJS)
 [`nodejs/main.mjs`](/multi/webgem/nodejs/main.mjs) | Express.js sample app | Node (modern JS/ECMAScript module)
@@ -17,6 +20,11 @@ App | Description | Platform
 [`nodejs/app.yaml`](/multi/webgem/nodejs/app.yaml) | Config file | App Engine
 [`nodejs/Dockerfile`](/multi/webgem/nodejs/Dockerfile) | (optional) Dockerfile | Cloud Run (**with** Docker)
 [`nodejs/package.json`](/multi/webgem/nodejs/package.json) |  3rd-party packages file | Node
+
+### Python
+
+File | Description | Platform
+--- | --- | ---
 [`python/main.py`](/multi/webgem/python/main.py) | Flask sample app | Python
 [`python/templates/index.html`](/multi/webgem/python/templates/index.html) | Web template | Jinja2 (identical to Nunjucks)
 [`python/app.yaml`](/multi/webgem/python/app.yaml) | Config file | App Engine
@@ -73,10 +81,10 @@ Cloud Functions (GCF) is a product generally used for microservices, simple func
 
 1. Create API key per instructions above.
 1. Perform pre-deployment tweaks/adjustments as necessary:
-    - Deployments using Docker:
+    - Deployments ***using Docker***:
         - Update Node.js or Python versions in `Dockerfile` as desired.
         - The `Procfile` is unused and may be deleted if desired.
-    - Deployments without using Docker:
+    - Deployments ***without using Docker***:
         - Deleting the `Dockerfile` is **required**.
         - [Cloud Buildpacks](https://github.com/GoogleCloudPlatform/buildpacks) automatically detects your language and selects a [default runtime version](https://cloud.google.com/docs/buildpacks/builders). (It also creates an internal `Dockerfile` to build your container with, but you won't see it nor have to know anything about Docker or containers other than your application is bundled into one.)
         - Update startup/"entrypoint" instructions in `Procfile` as desired.
@@ -85,4 +93,4 @@ Cloud Functions (GCF) is a product generally used for microservices, simple func
 
 | :memo: Gemini API also accessible from GCP Vertex AI |
 |:---------------------------|
-| While these sample apps access the Gemini API from Google AI, a great place for beginners and those experimenting with it, the API is also accessible from GCP's Vertex AI platform for those ready to use Gemini for production workloads. To learn more about calling the Gemini API from either (or both) places, see my "A better Gemini API 'Hello World!' sample" [blog post](https://dev.to/wescpy/a-better-google-gemini-api-hello-world-sample-4ddm), the first in the series linked at the top of this `README`.
+| While these sample apps access the Gemini API from Google AI, a great place for beginners and those experimenting with it, the API is also accessible from GCP's Vertex AI platform for those ready to use Gemini for production workloads in the cloud. To learn more about calling the Gemini API from either place (or both), see my "A better Gemini API 'Hello World!' sample" [blog post](https://dev.to/wescpy/a-better-google-gemini-api-hello-world-sample-4ddm), the first in the series linked up top.
