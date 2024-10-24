@@ -5,17 +5,17 @@ These are the code samples that are found in the 4th post _(upcoming)_ in the [s
 
 | :exclamation: API key required |
 |:---------------------------|
-| An API key is required to use Google's Gemini API. Follow the instructions below. If deploying locally, the app will ***not*** run without a `.env` file (Node.js) or `settings.py` (Python). For _testing/prototyping_ serverless cloud deployments, you can also use those same local files, However, for _production_ cloud deployments, rather than a local file, use GCP [Secret Manager](https://cloud.google.com/secret-manager) instead. |
+| An API key is required to use Google's Gemini API. Follow the instructions below. The app will ***not*** run without a `.env` file (Node.js) or `settings.py` (Python)s, whether for running locally or for _testing/prototyping_ serverless cloud deployments. However, for _production_ cloud deployments, rather than local files, use environment variables or GCP [Secret Manager](https://cloud.google.com/secret-manager) instead. |
 
 
 | :exclamation: GCP "is not free" |
 |:---------------------------|
-| GCP services aren't free, however all its serverless platforms have free quota available before you incur billing. Be sure to review the ["Costs" section in the top-level `README`](https://github.com/wescpy/nebulous-serverless#cost). |
+| GCP services aren't free, however all its serverless platforms have free quota available before you incur billing. Be sure to review the ["Costs" section in the top-level `README`](https://github.com/wescpy/nebulous-serverless#cost). If you are doing this as an event workshop, it's likely you were given GCP credits for a small amount in order to give you access to GCP and its services... refer to those instructions as necessary. |
 
 
 ## Table of contents
 
-There are two versions of the sample app, a Node.js Express.js app and Python Flask app. Below are the files in each folder and their purpose.
+There are two versions of the sample app, one for Node.js and the other, Python. Below are the files in each folder and their purpose. Pick one or both of these to try for yourself.
 
 
 ### Node.js
@@ -55,10 +55,13 @@ The local deployment of this web app is nearly identical to the code sample demo
 
 1. [Create API key](https://makersuite.google.com/app/apikey) and...
     - **Node.js**: Set in `.env` file as `API_KEY = <YOUR_API_KEY>;`
-    - ^**Python**: Set in `settings.py` file as `API_KEY = <YOUR_API_KEY>`
-1. Install packages:
-    - **Node.js**: `npm i dotenv express multer nunjucks sharp @google/generative-ai`
-    - **Python**: `pip install -U pip flask pillow google-generativeai` (or `pip3`)
+    - ^**Python**: Set in `settings.py` file as `API_KEY = '<YOUR_API_KEY>'`
+1. Install packages (either from scratch or a 3rd-party packages file):
+    - **Node.js** (from scratch): `npm i dotenv express multer nunjucks sharp @google/generative-ai`
+    - **Python** (from scratch): `pip install -U pip flask pillow google-generativeai` (or `pip3`)
+    - OR
+    - **Node.js** (from `package.json`): `npm up`
+    - **Python** (from `requirements.txt`): `pip install -r requirements.txt` (or `pip3`)
 1. Start local web server:
     - **Node.js**: `node main.js` or `node main.mjs`
     - **Python**: `python main.py` (or `python3`)
@@ -81,7 +84,7 @@ For all cloud deployments, the commands for Node.js and Python are identical. Th
 
 #### Cloud Functions (GCF)
 
-Cloud Functions is a product generally used for microservices, simple functions, or short mobile backend requests, not entire web apps. As this is a_ basic _web app, I may try to it working on GCF, but at this time, deployments are not available. If it ever supports GCF in the future, the instructions will be similar to what's crossed-out below.
+Cloud Functions is a product generally used for microservices, simple functions, or short mobile backend requests, not entire web apps. As this is a _basic_ (single-function) web app, I may try to it working on GCF in the future, or more likely, on its 2nd-gen successor platform, Cloud Run Functions (GCRF). If I did, the deploy command may be similar to what's crossed-out below:
 
 1. ~~Create API key per instructions above.~~
 1. ~~Run `gcloud functions deploy genai --runtime PLATFORM --entry-point app --trigger-http --allow-unauthenticated`~~
