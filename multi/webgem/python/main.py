@@ -11,6 +11,9 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
+#
+# FILE:    main.py
+# POST:    dev.to/wescpy/TBD
 
 from base64 import b64encode
 import io
@@ -19,19 +22,18 @@ from flask import Flask, render_template, request, url_for
 from werkzeug.utils import secure_filename
 from PIL import Image
 
-import google.generativeai as genai
+from google import genai
 from settings import API_KEY    # can also use .env & python-dotenv
 
 ALLOW_EXTS = {'png', 'jpg', 'jpeg', 'gif'}  # allowed types
-MODEL_NAME = 'gemini-1.5-flash-latest'  # Gemini LLM model
+MODEL_NAME = 'gemini-2.5-flash'         # Gemini LLM model
 THUMB_DIMS = 480, 360                   # thumbnail dimensions
 JINUN_TMPL = 'index.html'               # Jinja2/Nunjucks template
 
 app = Flask(__name__)                   # Flask application
-genai.configure(api_key=API_KEY)        # API key authz
-model = genai.GenerativeModel(MODEL_NAME)   # Gemini
+GENAI = genai.Client(api_key=API_KEY)   # API key authz
 
-def is_allowed_file(fname: str) -> bool:
+def is_allowed_file(fname):
     'check if file (name extension) an allowed file type'
     return '.' in fname and fname.rsplit('.', 1)[1].lower() in ALLOW_EXTS
 
@@ -85,7 +87,8 @@ def main():
         context['prompt'] = prompt
         thumb_b64 = b64encode(img_io.getvalue()).decode('ascii')
         context['image']  = f'data:{upload.mimetype};base64,{thumb_b64}'
-        context['result'] = model.generate_content((prompt, image)).text
+        context['result'] = GENAI.models.generate_content(
+                model=MODEL_NAME, contents=(prompt, image)).text
 
     # show only form (GET) or with processed results (POST)
     return render_template(JINUN_TMPL, **context)

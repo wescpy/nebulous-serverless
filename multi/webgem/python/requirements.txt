@@ -1,4 +1,4 @@
 #gunicorn
 flask
 pillow
-google-generativeai
+google-genai

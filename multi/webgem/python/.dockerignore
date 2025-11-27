@@ -6,14 +6,14 @@
 .hgignore
 .hg/
 
+# README/text files
+LICENSE
+*.md
+
 # Python
 *.py[cod]
 __pycache__/
 /setup.cfg
-
-# README/text files
-LICENSE
-*.md
 
 # Installer logs
 pip-log.txt
@@ -31,6 +31,8 @@ coverage.xml
 system_tests/local_test_setup
 pylintrc
 pylintrc.test
+test/
+credentials.json
 
 # Mac
 .DS_Store

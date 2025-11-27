@@ -1,9 +1,10 @@
 # Google Gemini API serverless web app samples
-These are the code samples that are found in the (_forthcoming_) post in the [series introducing the Gemini API](https://dev.to/wescpy/series/27183). While you're waiting for that, all of the code is explained in [this post](https://dev.to/wescpy/gemini-api-102a-putting-together-a-basic-genai-web-app-3e3). (The apps in that post don't have the resources necessary for you to deploy them to GCP serverless platforms.)
+
+This is (will be) featured in an upcoming post in the [Gemini API series](https://dev.to/wescpy/series/27183). While you're waiting for that, all of the code is explained in [this post](https://dev.to/wescpy/gemini-api-102a-putting-together-a-basic-genai-web-app-3e3). The app in that post is nearly identical to the one here but lacks the configuration files to be deployable to GCP serverless platforms. (In other words, it's the same web app but can only be self-hosted/hosted locally.)
 
 | :exclamation: **API key required** |
 |:---------------------------|
-| An API key is required to use the Gemini API. Follow the instructions below. The app will ***not*** run without a `.env` file (Node.js) or `settings.py` (Python)s, whether for running locally or for _testing/prototyping_ serverless cloud deployments. However, for _production_ cloud deployments, rather than local files, use environment variables or GCP [Secret Manager](https://cloud.google.com/secret-manager) instead. |
+| An API key is required to use the Gemini API. Follow the instructions below. The app will ***not*** run without a `.env` file (Node.js) or `settings.py` (Python)s, whether for running locally or for _testing/prototyping_ serverless cloud deployments. However, for _production_ cloud deployments, rather than local files, use environment variables or GCP [Secret Manager](https://cloud.google.com/secret-manager) instead. A template for each, `.env_TMPL` and `settings_TMPL.py`, respectively, are provided as a convenience. |
 
 | :exclamation: **GCP "is not free"** |
 |:---------------------------|
@@ -23,6 +24,7 @@ File | Description | Platform
 [`nodejs/app.yaml`](/multi/webgem/nodejs/app.yaml) | Config file | App Engine
 [`nodejs/Dockerfile`](/multi/webgem/nodejs/Dockerfile) | (optional) Dockerfile | Cloud Run (**with** Docker)
 [`nodejs/package.json`](/multi/webgem/nodejs/package.json) |  3rd-party packages file | Node
+[`python/.env_TMPL`](/multi/webgem/nodejs/.env_TMPL) | `.env` template | Node
 
 
 ### Python
@@ -34,13 +36,16 @@ File | Description | Platform
 [`python/Dockerfile`](/multi/webgem/python/Dockerfile) | (optional) Dockerfile | Cloud Run (**with** Docker)
 [`python/Procfile`](/multi/webgem/python/Procfile) | (optional) Procfile | Cloud Run (**without** Docker)
 [`python/requirements.txt`](/multi/webgem/python/requirements.txt) |  3rd-party packages file | Python
+[`python/settings_TMPL.py`](/multi/webgem/python/settings_TMPL.py) | `settings.py` template | Python 3
 
 
 ## Setup
 Follow the instructions below to deploy these apps to GCP serverless platforms, App Engine and Cloud Run:
 1. **Get `gcloud` CLI tool**: [Install the Cloud SDK](https://cloud.google.com/sdk/docs/install) (includes `gcloud`)
-1. **Languages**: While _Node 18+_ and _Python 3.9+_ are recommended, prior releases may also work. The code was built & tested with current versions of Node (20 or 22) and Python (3.11 or 3.12). After cloning this repo, go to the desired folder, `nodejs` or `python`.
-1. (_optional_) **Create "virtualenv"**: Python developers have the option to [create & activate a virtual environment (virtualenv) for isolation](https://packaging.python.org/en/latest/guides/installing-using-pip-and-virtual-environments/#create-and-use-virtual-environments) with `python -m venv <NAME>` (or `python3`) followed by `source <NAME>/bin/activate` where `NAME` can be something like `env`, `myvenv`, etc.
+1. **Languages**: While _Node 18+_ and _Python 3.9+_ are recommended, prior releases may also work. The code was built & tested with current versions of Node (24-26) and Python (3.11-3.13). After cloning this repo, go to the desired folder, `nodejs` or `python`. For Python developers:
+    - In the commands below, depending on your system configuration, you will use one of (`pip`, `pip3`, `python3 -m pip`), but the instructions are generalized to `pip`.
+    - (_optional_) **Create "virtualenv"**: [Create & activate a virtual environment (virtualenv) for isolation](https://packaging.python.org/en/latest/guides/installing-using-pip-and-virtual-environments/#create-and-use-virtual-environments) with `python -m venv <NAME>` (or `python3`) followed by `source <NAME>/bin/activate` where `NAME` can be something like `env`, `myvenv`, etc.
+    1. (optional) Update `pip` and install `uv`: `pip install -U pip uv`
 
 
 ## Run locally
@@ -48,18 +53,15 @@ Follow the instructions below to deploy these apps to GCP serverless platforms, 
     - **Node.js**: Set in `.env` file as `API_KEY = <YOUR_API_KEY>;`
     - ^**Python**: Set in `settings.py` file as `API_KEY = '<YOUR_API_KEY>'`
 1. Install 3rd-party packages (from scratch or via requirements file):
-    - **Node.js** (from `package.json`): `npm up`
-    - **Python** (from `requirements.txt`): `pip install -r requirements.txt` (or `pip3`)
-    - OR
-    - **Node.js** (from scratch): `npm i dotenv express multer nunjucks sharp @google/generative-ai`
-    - **Python** (from scratch): `pip install -U pip flask pillow google-generativeai` (or `pip3`)
+    - **Node.js**: `npm i`
+    - **Python**: `uv pip install -Ur requirements.txt` (drop `uv` if you didn't install it)
 1. Start local web server:
     - **Node.js**: `npm start` (runs `node main.mjs`) or `node main.js`
     - **Python**: `python main.py` (or `python3`)
 
 <sup>^</sup> — Alternatively for Python, instead of `settings.py`, you can save it to `.env` but would need to install `python-dotenv` and add the code to use it if you want to more closely mirror the Node version.
 
-These apps are nearly-identical to those featured this [blog post](https://dev.to/wescpy/gemini-api-102a-putting-together-a-basic-genai-web-app-3e3). The difference is that the original v0.1 can _only_ run locally. This v0.2 release has the additional config files necessary to make it deployable to the cloud in addition to running locally.
+This app is nearly-identical to what's featured in this [blog post](https://dev.to/wescpy/gemini-api-102a-putting-together-a-basic-genai-web-app-3e3). The difference is that the original [**v0.1** version](https://github.com/wescpy/google/tree/main/gemini/webgem) _can_ ***only*** _run locally_. This cloud-based version has the additional config files necessary to make it deployable to the cloud (serverless platforms), in addition to local deployments.
 
 
 ## Deploy to and host/run on Google Cloud
@@ -127,7 +129,7 @@ On the other hand, if you're not going to continue with GAE or GCR or this GCP p
 
 | :memo: **Gemini API also accessible from GCP Vertex AI** |
 |:---------------------------|
-| While these sample apps access the Gemini API from Google AI, a great place for beginners and those experimenting with it, the API is also accessible from GCP's Vertex AI platform for those ready to use Gemini for production workloads in the cloud. To learn more about calling the Gemini API from either place (or both), see the first post listed in the **Gemini API** references subsection below.
+| While these sample apps access the Gemini API from Google AI, a great place for beginners and those experimenting with it, the API is also accessible from GCP's Vertex AI platform for those ready to use Gemini for production workloads. To learn more about calling the Gemini API from either (or both) places, see [this post](https://bit.ly/4kFkmLm). The `.env_TMPL` and `settings_TMPL.py` files have placeholders for the required GCP information to call the Gemini API from the Vertex AI platform. |
 
 
 ## References
@@ -138,8 +140,10 @@ To learn more, check out these blog posts:
 1. [Hosting apps in the cloud with Google App Engine in 2024](https://dev.to/wescpy/hosting-apps-in-the-cloud-with-google-app-engine-3fn)
 1. [Google App Engine Jan 2024 deprecation: What you need to know](https://dev.to/wescpy/python-app-engine-jan-2024-deprecation-what-you-need-to-know-4bci)
 
-### Gemini API (from Google AI or GCP Vertex AI)
+### Gemini API (from Google AI or GCP Vertex AI) blog post series
 1. [A better Google Gemini API "Hello World!" sample](https://dev.to/wescpy/a-better-google-gemini-api-hello-world-sample-4ddm)
 1. [Gemini API 102: Next steps beyond "Hello World!"](https://dev.to/wescpy/gemini-api-102-next-steps-beyond-hello-world-1pb7)
 1. [Gemini API 102a: Putting together basic GenAI web apps](https://dev.to/wescpy/gemini-api-102a-putting-together-a-basic-genai-web-app-3e3)
-1. (_A 4th post featuring these sample apps is forthcoming._)
+1. [Generating audio clips with Gemini 2.0 Flash](https://dev.to/wescpy/generate-audio-clips-with-gemini-20-flash-from-google-n0g)
+1. [Generating images with Gemini 2.0 Flash](https://dev.to/wescpy/generating-images-with-gemini-20-flash-from-google-448e)
+1. [Gemini 2.5 API Missing Manual: How to get started (or upgrade from Gemini 1.0/1.5)](https://bit.ly/4kFkmLm)
