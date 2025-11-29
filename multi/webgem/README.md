@@ -44,7 +44,7 @@ File | Description | Platform
 [`python/fastapi/Dockerfile`](/multi/webgem/python/fastapi/Dockerfile) | (optional) Dockerfile (FastAPI) | Cloud Run (**with** Docker)
 [`python/fastapi/Procfile`](/multi/webgem/python/fastapi/Procfile) | (optional) Procfile (FastAPI) | Cloud Run (**without** Docker)
 
-The Python app is available in two flavors, the original Flask (synchronous) version, or a FastAPI async version. For the latter, grab the files from the [`fastapi` subfolder](](/multi/webgem/python/fastapi) and overwrite their Flask equivalents in the main folder.
+The Python app is available in two flavors, the original Flask (synchronous) version, or a FastAPI async version. For the latter, grab the files from the [`fastapi` subfolder](/multi/webgem/python/fastapi) and overwrite their Flask equivalents in the main folder.
 
 | :exclamation: **FastAPI app on GAE "requires" `gunicorn`** |
 |:---------------------------|
