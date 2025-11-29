@@ -1,6 +1,6 @@
 # Google Gemini API serverless web app samples
 
-This is (will be) featured in an upcoming post in the [Gemini API series](https://dev.to/wescpy/series/27183). While you're waiting for that, all of the code is explained in [this post](https://dev.to/wescpy/gemini-api-102a-putting-together-a-basic-genai-web-app-3e3). The app in that post is nearly identical to the one here but lacks the configuration files to be deployable to GCP serverless platforms. (In other words, it's the same web app but can only be self-hosted/hosted locally.)
+This is (will be) featured in an upcoming post in the [Gemini API series](https://dev.to/wescpy/series/27183). While you're waiting for that, all of the code is explained in [this post](http://bit.ly/3Kqv78c). The app in that post is nearly identical to the one here but lacks the configuration files to be deployable to GCP serverless platforms. (In other words, it's the same web app but can only be self-hosted/hosted locally.)
 
 | :exclamation: **API key required** |
 |:---------------------------|
@@ -32,11 +32,23 @@ File | Description | Platform
 --- | --- | ---
 [`python/main.py`](/multi/webgem/python/main.py) | Flask sample app | Python 3
 [`python/templates/index.html`](/multi/webgem/python/templates/index.html) | Web template | Jinja2 (identical to Nunjucks)
-[`python/app.yaml`](/multi/webgem/python/app.yaml) | Config file | App Engine
-[`python/Dockerfile`](/multi/webgem/python/Dockerfile) | (optional) Dockerfile | Cloud Run (**with** Docker)
-[`python/Procfile`](/multi/webgem/python/Procfile) | (optional) Procfile | Cloud Run (**without** Docker)
+[`python/app.yaml`](/multi/webgem/python/app.yaml) | Config file (Flask) | App Engine
+[`python/Dockerfile`](/multi/webgem/python/Dockerfile) | (optional) Dockerfile (Flask) | Cloud Run (**with** Docker)
+[`python/Procfile`](/multi/webgem/python/Procfile) | (optional) Procfile (Flask) | Cloud Run (**without** Docker)
 [`python/requirements.txt`](/multi/webgem/python/requirements.txt) |  3rd-party packages file | Python
 [`python/settings_TMPL.py`](/multi/webgem/python/settings_TMPL.py) | `settings.py` template | Python 3
+ | |
+[`python/fastapi/main.py`](/multi/webgem/python/fastapi/main.py) | FastAPI sample app | Python 3
+[`python/fastapi/requirements.txt`](/multi/webgem/python/fastapi/requirements.txt) | FastAPI 3rd-party packages | Python 3
+[`python/fastapi/app.yaml`](/multi/webgem/python/fastapi/app.yaml) | Config file (FastAPI) | App Engine
+[`python/fastapi/Dockerfile`](/multi/webgem/python/fastapi/Dockerfile) | (optional) Dockerfile (FastAPI) | Cloud Run (**with** Docker)
+[`python/fastapi/Procfile`](/multi/webgem/python/fastapi/Procfile) | (optional) Procfile (FastAPI) | Cloud Run (**without** Docker)
+
+The Python app is available in two flavors, the original Flask (synchronous) version, or a FastAPI async version. For the latter, grab the files from the [`fastapi` subfolder](](/multi/webgem/python/fastapi) and overwrite their Flask equivalents in the main folder.
+
+| :exclamation: **FastAPI app on GAE "requires" `gunicorn`** |
+|:---------------------------|
+| Deploying the FastAPI app on App Engine requires you to uncomment `gunicorn` from its `requirements.txt` file. GAE defaults to providing generic (synchronous) `gunicorn` usage, however FastAPI apps use the (asynchronous) `uvicorn`, so you have to explicity "install" `gunicorn` and tell it to use `uvicorn` workers... see the `entrypoint:` directive in its `app.yaml`. |
 
 
 ## Setup
@@ -44,8 +56,10 @@ Follow the instructions below to deploy these apps to GCP serverless platforms, 
 1. **Get `gcloud` CLI tool**: [Install the Cloud SDK](https://cloud.google.com/sdk/docs/install) (includes `gcloud`)
 1. **Languages**: While _Node 18+_ and _Python 3.9+_ are recommended, prior releases may also work. The code was built & tested with current versions of Node (24-26) and Python (3.11-3.13). After cloning this repo, go to the desired folder, `nodejs` or `python`. For Python developers:
     - In the commands below, depending on your system configuration, you will use one of (`pip`, `pip3`, `python3 -m pip`), but the instructions are generalized to `pip`.
-    - (_optional_) **Create "virtualenv"**: [Create & activate a virtual environment (virtualenv) for isolation](https://packaging.python.org/en/latest/guides/installing-using-pip-and-virtual-environments/#create-and-use-virtual-environments) with `python -m venv <NAME>` (or `python3`) followed by `source <NAME>/bin/activate` where `NAME` can be something like `env`, `myvenv`, etc.
-    1. (optional) Update `pip` and install `uv`: `pip install -U pip uv`
+
+For local development, considering creating a virtual environment and using `uv`:
+- (_optional_) **Create "virtualenv"**: [Create & activate a virtual environment (virtualenv) for isolation](https://packaging.python.org/en/latest/guides/installing-using-pip-and-virtual-environments/#create-and-use-virtual-environments) with `python -m venv <NAME>` (or `python3`) followed by `source <NAME>/bin/activate` where `NAME` can be something like `env`, `myvenv`, etc.
+- (optional) Update `pip` and install `uv`: `pip install -U pip uv`
 
 
 ## Run locally
@@ -61,7 +75,7 @@ Follow the instructions below to deploy these apps to GCP serverless platforms, 
 
 <sup>^</sup> — Alternatively for Python, instead of `settings.py`, you can save it to `.env` but would need to install `python-dotenv` and add the code to use it if you want to more closely mirror the Node version.
 
-This app is nearly-identical to what's featured in this [blog post](https://dev.to/wescpy/gemini-api-102a-putting-together-a-basic-genai-web-app-3e3). The difference is that the original [**v0.1** version](https://github.com/wescpy/google/tree/main/gemini/webgem) _can_ ***only*** _run locally_. This cloud-based version has the additional config files necessary to make it deployable to the cloud (serverless platforms), in addition to local deployments.
+This app is nearly-identical to what's featured in this [blog post](http://bit.ly/3Kqv78c). The difference: [that version](https://github.com/wescpy/google/tree/main/gemini/webgem) _can_ ***only*** _run locally_. This cloud-based version has additional config files so it's deployable to the cloud (serverless platforms), in addition to running locally.
 
 
 ## Deploy to and host/run on Google Cloud
