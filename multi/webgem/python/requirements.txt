@@ -1,4 +1,5 @@
 #gunicorn
 flask
+mistune
 pillow
 google-genai

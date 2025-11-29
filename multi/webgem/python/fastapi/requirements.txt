@@ -1,4 +1,5 @@
-#gunicorn
+#gunicorn  # uncomment for App Engine (required)
 fastapi[standard]
+mistune
 pillow
 google-genai

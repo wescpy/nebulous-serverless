@@ -27,7 +27,7 @@ body {
     <h3>LLM analysis</h3>
     <b>Prompt received:</b> {{ prompt }}<p></p>
     <b>Model used:</b> {{ model }}<p></p>
-    <b>Model response:</b> {{ result }}<p></p>
+    <b>Model response:</b> {{ result|safe }}<p></p>
     <hr>
 {% endif %}
 
