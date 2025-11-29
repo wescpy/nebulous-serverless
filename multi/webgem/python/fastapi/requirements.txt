@@ -1,0 +1,4 @@
+#gunicorn
+fastapi[standard]
+pillow
+google-genai

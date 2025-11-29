@@ -1,3 +1,8 @@
+# Local
+settings_TMPL.py
+fastapi/
+
+# GCP
 .gcloudignore
 
 # Source code control files
@@ -49,3 +54,5 @@ docs.metadata
 
 # Virtual environment
 env/
+venv/
+.venv/

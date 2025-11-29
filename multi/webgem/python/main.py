@@ -13,7 +13,7 @@
 # limitations under the License.
 #
 # FILE:    main.py
-# POST:    dev.to/wescpy/TBD
+# POST:    bit.ly/3Kqv78c and bit.ly/TBD
 
 from base64 import b64encode
 import io
