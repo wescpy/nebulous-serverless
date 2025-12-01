@@ -18,31 +18,36 @@ There are two versions of the sample app, Node.js and Python. Below are the file
 ### Node.js
 File | Description | Platform
 --- | --- | ---
-[`nodejs/main.js`](/multi/webgem/nodejs/main.js) | Express.js sample app | Node (CommonJS)
-[`nodejs/main.mjs`](/multi/webgem/nodejs/main.mjs) | Express.js sample app | Node (modern JS/ECMAScript module)
+[`nodejs/.env_TMPL`](/multi/webgem/nodejs/.env_TMPL) | `.env` environment settings template | Node
+[`nodejs/package.json`](/multi/webgem/nodejs/package.json) |  3rd-party packages | Node
+[`nodejs/main.js`](/multi/webgem/nodejs/main.js) | Express.js sample app | Node (CommonJS script)
+[`nodejs/main.mjs`](/multi/webgem/nodejs/main.mjs) | Express.js sample app | Node (ECMAScript module)
 [`nodejs/templates/index.html`](/multi/webgem/nodejs/templates/index.html) | Web template | Nunjucks (identical to Jinja2)
 [`nodejs/app.yaml`](/multi/webgem/nodejs/app.yaml) | Config file | App Engine
-[`nodejs/Dockerfile`](/multi/webgem/nodejs/Dockerfile) | (optional) Dockerfile | Cloud Run (**with** Docker)
-[`nodejs/package.json`](/multi/webgem/nodejs/package.json) |  3rd-party packages file | Node
-[`python/.env_TMPL`](/multi/webgem/nodejs/.env_TMPL) | `.env` template | Node
+[`nodejs/Dockerfile`](/multi/webgem/nodejs/Dockerfile) | Dockerfile | Cloud Run (**with** Docker)
+[`nodejs/.dockerignore`](/multi/webgem/nodejs/.dockerignore) | .dockerignore | Cloud Run (**with** Docker)
+[`nodejs/Procfile`](/multi/webgem/nodejs/Procfile) | Procfile | Cloud Run (**without** Docker)
+[`nodejs/.gcloudignore`](/multi/webgem/nodejs/.gcloudignore) | .gcloudignore | App Engine & Cloud Run
 
 
 ### Python
 File | Description | Platform
 --- | --- | ---
+[`python/settings_TMPL.py`](/multi/webgem/python/settings_TMPL.py) | `settings.py` environment settings template | Python 3
+[`python/requirements.txt`](/multi/webgem/python/requirements.txt) | Flask 3rd-party packages | Python
 [`python/main.py`](/multi/webgem/python/main.py) | Flask sample app | Python 3
 [`python/templates/index.html`](/multi/webgem/python/templates/index.html) | Web template | Jinja2 (identical to Nunjucks)
 [`python/app.yaml`](/multi/webgem/python/app.yaml) | Config file (Flask) | App Engine
-[`python/Dockerfile`](/multi/webgem/python/Dockerfile) | (optional) Dockerfile (Flask) | Cloud Run (**with** Docker)
-[`python/Procfile`](/multi/webgem/python/Procfile) | (optional) Procfile (Flask) | Cloud Run (**without** Docker)
-[`python/requirements.txt`](/multi/webgem/python/requirements.txt) |  3rd-party packages file | Python
-[`python/settings_TMPL.py`](/multi/webgem/python/settings_TMPL.py) | `settings.py` template | Python 3
+[`python/Dockerfile`](/multi/webgem/python/Dockerfile) | Dockerfile (Flask) | Cloud Run (**with** Docker)
+[`python/.dockerignore`](/multi/webgem/python/.dockerignore) | .dockerignore | Cloud Run (**with** Docker)
+[`python/Procfile`](/multi/webgem/python/Procfile) | Procfile (Flask) | Cloud Run (**without** Docker)
+[`python/.gcloudignore`](/multi/webgem/python/.gcloudignore) | .gcloudignore | App Engine & Cloud Run
  | |
-[`python/fastapi/main.py`](/multi/webgem/python/fastapi/main.py) | FastAPI sample app | Python 3
 [`python/fastapi/requirements.txt`](/multi/webgem/python/fastapi/requirements.txt) | FastAPI 3rd-party packages | Python 3
+[`python/fastapi/main.py`](/multi/webgem/python/fastapi/main.py) | FastAPI sample app | Python 3
 [`python/fastapi/app.yaml`](/multi/webgem/python/fastapi/app.yaml) | Config file (FastAPI) | App Engine
-[`python/fastapi/Dockerfile`](/multi/webgem/python/fastapi/Dockerfile) | (optional) Dockerfile (FastAPI) | Cloud Run (**with** Docker)
-[`python/fastapi/Procfile`](/multi/webgem/python/fastapi/Procfile) | (optional) Procfile (FastAPI) | Cloud Run (**without** Docker)
+[`python/fastapi/Dockerfile`](/multi/webgem/python/fastapi/Dockerfile) | Dockerfile (FastAPI) | Cloud Run (**with** Docker)
+[`python/fastapi/Procfile`](/multi/webgem/python/fastapi/Procfile) | Procfile (FastAPI) | Cloud Run (**without** Docker)
 
 The Python app is available in two flavors, the original Flask (synchronous) version, or a FastAPI async version. For the latter, grab the files from the [`fastapi` subfolder](/multi/webgem/python/fastapi) and overwrite their Flask equivalents in the main folder.
 
