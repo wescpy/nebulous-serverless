@@ -1,6 +1,15 @@
 # Google Gemini API serverless web app samples
 
-This is (will be) featured in an upcoming post in the [Gemini API series](https://dev.to/wescpy/series/27183). While you're waiting for that, all of the code is explained in [this post](http://bit.ly/3Kqv78c). The app in that post is nearly identical to the one here but lacks the configuration files to be deployable to GCP serverless platforms. (In other words, it's the same web app but can only be self-hosted/hosted locally.)
+This is the repo for the web app(s) featured in the ["Simplifying basic (genAI) web app deployment with serverless" post](https://bit.ly/48dnMSv), part of the [Gemini API series](https://dev.to/wescpy/series/27183). The code for the web app itself is explained in [this earlier post](http://bit.ly/3Kqv78c) which focused on basic genAI web apps, and this post/repo takes it a step further to show you how to deploy to Google Cloud/GCP serverless platforms like App Engine and Cloud Run.
+
+While the original web app code has [its own repo](https://github.com/wescpy/google/tree/main/gemini/webgem), it can only be run locally or on your own servers. _This repo_ may have the same app(s) **but** it has the additional package tweaks and config files needed for successful serverless deployment. The apps are available in Node.js and Python, and each has several variations:
+
+Language | Version | Web framework
+--- | --- | ---
+Node.js | ECMAscript module | Express
+Node.js | CommonJS script | Express
+Python | Python 3 | Flask
+Python | Python 3 | FastAPI
 
 | :exclamation: **API key required** |
 |:---------------------------|
