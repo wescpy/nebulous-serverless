@@ -34,7 +34,7 @@ These are the files provided in this repo and the deployments they're applicable
 ![repository files](https://user-images.githubusercontent.com/1102504/119735453-2f3af500-be31-11eb-9115-3fdeb22ec31c.png)
 
 > NOTES:
->- * &mdash; `requirements.txt` is used for local and App Engine (2.x) package installations and not required in deployments themselves unlike all others
+>- * &mdash; Files denoted as "all" are all application files except `requirements.txt`, which is only used to denote/install 3rd-party packages and is otherwise not part of the application itself.
 >- `main.py` and `templates/index.html` comprise the entire application and are always required
 >- `noxfile.py` and `test_translate.py` are for testing only; see [Testing section](#testing) below
 >- All `.*ignore` and `.git*` files/folders are administrative and not listed in table above or deployments below
